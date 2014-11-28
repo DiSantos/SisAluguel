@@ -11,7 +11,7 @@ public class Funcionario extends Pessoa {
 		this.salario = 0.0;
 	}
 
-	public Funcionario(String nome, String cpf, String ctps, double salario) {
+	public Funcionario(String nome, long cpf, String ctps, double salario) {
 		super(nome, cpf);
 		setCtps(ctps);
 		setSalario(salario);
@@ -44,13 +44,4 @@ public class Funcionario extends Pessoa {
 		output.append("Salário: " + getSalario());
 		return output.toString();
 	}
-
-	public static void main(String[] args) {
-
-		Funcionario f = new Funcionario("Diego", "08271335456", "70.23502",
-				800.00);
-
-		System.out.println(f.toString());
-	}
-
 }

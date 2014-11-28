@@ -19,7 +19,7 @@ public class SingletonConexaoDB {
 
 	private SingletonConexaoDB() {
 
-		this.nomeBanco = "aluguel_bd.sqlite";
+		this.nomeBanco = "dbaluguel.sqlite";
 		this.driverDeConexao = "org.sqlite.JDBC";
 		this.url = "jdbc:sqlite:" + nomeBanco;
 
