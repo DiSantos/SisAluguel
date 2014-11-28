@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /*Padrão Singleton*/
-public class ConexaoBancoDeDados {
+public class SingletonConexaoDB {
 
 	private Connection connection = null;
 	private String driverDeConexao = "";
@@ -15,9 +15,9 @@ public class ConexaoBancoDeDados {
 	private String nomeBanco;
 
 	/* variável de controle de instância */
-	private static ConexaoBancoDeDados instanciaSingleton;
+	private static SingletonConexaoDB instanciaSingleton;
 
-	private ConexaoBancoDeDados() {
+	private SingletonConexaoDB() {
 
 		this.nomeBanco = "aluguel_bd.sqlite";
 		this.driverDeConexao = "org.sqlite.JDBC";
@@ -25,10 +25,10 @@ public class ConexaoBancoDeDados {
 
 	}
 
-	public static synchronized ConexaoBancoDeDados getInstance() {
+	public static synchronized SingletonConexaoDB getInstance() {
 
 		if (instanciaSingleton == null) {
-			instanciaSingleton = new ConexaoBancoDeDados();
+			instanciaSingleton = new SingletonConexaoDB();
 		}
 		return instanciaSingleton;
 	}
@@ -67,7 +67,7 @@ public class ConexaoBancoDeDados {
 	
 	public static void main(String[] args) {
      try {
-        Connection c = ConexaoBancoDeDados.getInstance().conectar();
+        Connection c = SingletonConexaoDB.getInstance().conectar();
     	PreparedStatement pstm = null;
     	String sql = "";
     	sql = "INSERT INTO Funcionario(fun_nome, fun_cpf, fun_ctps, fun_data_nasc) VALUES('José', 01234567891, '70.88.abc', '21/11/1987')";
@@ -80,7 +80,7 @@ public class ConexaoBancoDeDados {
 		e.printStackTrace();
 	}finally{
 		try {
-			ConexaoBancoDeDados.getInstance().desconectar();
+			SingletonConexaoDB.getInstance().desconectar();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
