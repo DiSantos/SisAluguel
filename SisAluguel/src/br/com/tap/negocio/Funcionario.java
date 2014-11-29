@@ -11,8 +11,8 @@ public class Funcionario extends Pessoa {
 		this.salario = 0.0;
 	}
 
-	public Funcionario(String nome, long cpf, String ctps, double salario) {
-		super(nome, cpf);
+	public Funcionario(String cpf,String nome, String ctps, double salario) {
+		super( cpf,nome);
 		setCtps(ctps);
 		setSalario(salario);
 	}

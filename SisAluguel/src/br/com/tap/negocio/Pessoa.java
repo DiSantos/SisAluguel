@@ -1,16 +1,18 @@
 package br.com.tap.negocio;
 
 public class Pessoa {
-
+     
+	private String cpf;
 	private String nome;
-	private long cpf;
+
 
 	public Pessoa() {
+		this.cpf = "";
 		this.nome = "";
-		this.cpf = 0;
+	
 	}
 
-	public Pessoa(String nome, long cpf) {
+	public Pessoa(String cpf, String nome) {
 		setNome(nome);
 		setCpf(cpf);
 	}
@@ -24,11 +26,11 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public long getCpf() {
+	public String getCpf() {
 		return this.cpf;
 	}
 
-	public void setCpf(long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

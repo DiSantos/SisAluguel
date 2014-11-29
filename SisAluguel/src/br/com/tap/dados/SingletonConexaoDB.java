@@ -8,10 +8,9 @@ import java.sql.SQLException;
 /*Padrão Singleton*/
 public class SingletonConexaoDB {
 
-	private Connection connection = null;
+	public Connection connection = null;
 	private String driverDeConexao = "";
 	private String url = "";
-	public Connection conexao;
 	private String nomeBanco;
 
 	/* variável de controle de instância */
