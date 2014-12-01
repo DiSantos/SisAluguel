@@ -12,7 +12,7 @@ public interface IRepositorioRoupa {
 
 	public void atualizarRoupa(Roupa Roupa) throws Exception;
 
-	public void removerRoupa(String roupa) throws Exception;
+	public void removerRoupa(long codRoupa) throws Exception;
 
 	public List<Roupa> listarRoupaPorNome(long codigoRoupa);  //inserir na tabela do banco
 }

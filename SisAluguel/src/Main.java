@@ -11,13 +11,13 @@ public class Main {
 		// 789);
 		Funcionario fun2 = new Funcionario("02831745365", "Taynan", "1200", 500);
 		try {
+			
 			IFachada fachada = new Fachada();
 
 			if (fachada.removerFuncionario("08271335456")) {
 				UtilGUI.sucessoMensagem("Sucesso",
 						"Funcionario Removido com Sucesso!!!");
 			}
-
 			/*
 			 * if (fachada.inserirFuncionario(fun1)) {
 			 * UtilGUI.sucessoMensagem("Sucesso",
