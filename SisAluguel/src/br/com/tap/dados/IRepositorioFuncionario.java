@@ -6,8 +6,7 @@ import br.com.tap.negocio.Funcionario;
 
 public interface IRepositorioFuncionario {
 
-	public void inserirFuncionario(Funcionario novoFuncionario)
-			throws Exception;
+	public void inserirFuncionario(Funcionario novoFuncionario)throws Exception;
 
 	public void atualizarFuncionario(Funcionario funcionario) throws Exception;
 

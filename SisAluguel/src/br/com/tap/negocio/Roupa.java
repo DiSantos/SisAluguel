@@ -4,7 +4,7 @@ public class Roupa {
 
 	private String descricao;
 	private double valor;
-	private long codigoRoupa;
+	private long codigoRoupa;// id da roupa....
 
 	public Roupa() {
 
@@ -45,8 +45,6 @@ public class Roupa {
 	public void setCodigoRoupa(long codigoRoupa) {
 		this.codigoRoupa = codigoRoupa;
 	}
-	
-	
 
 	@Override
 	public String toString() {
