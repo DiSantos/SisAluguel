@@ -12,6 +12,6 @@ public interface IRepositorioFuncionario {
 
 	public void removerFuncionario(String cpf) throws Exception;
 
-	public List<Funcionario> listarFuncionarioPorNome(String nome);
+	public List<Funcionario> listarFuncionarioPorNome(String nome)throws Exception;
 
 }

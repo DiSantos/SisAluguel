@@ -52,6 +52,14 @@ public class SingletonConexaoDB {
 
 		return connection;
 	}
+	
+	public void desconectar() throws Exception {
+
+		System.out.println("\nDesconectar");
+		if (this.connection != null) {
+			this.connection.close();
+		}
+	}
 
 	public void desconectar(Connection con) throws Exception {
 

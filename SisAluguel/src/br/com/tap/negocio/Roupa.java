@@ -2,9 +2,10 @@ package br.com.tap.negocio;
 
 public class Roupa {
 
+	private int idRoupa;
 	private String descricao;
 	private double valor;
-	private long codigoRoupa;// id da roupa....
+	private long codigoRoupa;
 
 	public Roupa() {
 
@@ -44,6 +45,14 @@ public class Roupa {
 
 	public void setCodigoRoupa(long codigoRoupa) {
 		this.codigoRoupa = codigoRoupa;
+	}
+
+	public int getIdRoupa() {
+		return idRoupa;
+	}
+
+	public void setIdRoupa(int idRoupa) {
+		this.idRoupa = idRoupa;
 	}
 
 	@Override

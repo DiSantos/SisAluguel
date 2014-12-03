@@ -2,6 +2,7 @@ package br.com.tap.negocio;
 
 public class Funcionario extends Pessoa {
 
+	private int idFun;
 	private String ctps;
 	private double salario;
 
@@ -11,8 +12,8 @@ public class Funcionario extends Pessoa {
 		this.salario = 0.0;
 	}
 
-	public Funcionario(String cpf,String nome, String ctps, double salario) {
-		super( cpf,nome);
+	public Funcionario(String cpf, String nome, String ctps, double salario) {
+		super(cpf, nome);
 		setCtps(ctps);
 		setSalario(salario);
 	}
@@ -31,6 +32,14 @@ public class Funcionario extends Pessoa {
 
 	public void setSalario(double salario) {
 		this.salario = salario;
+	}
+
+	public int getIdFun() {
+		return idFun;
+	}
+
+	public void setIdFun(int idFun) {
+		this.idFun = idFun;
 	}
 
 	/* O método toString produz uma representação de string de qualquer objeto. */

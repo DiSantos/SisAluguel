@@ -1,19 +1,33 @@
 package br.com.tap.negocio;
 
 public class Telefone {
+
+	private int idTelefone;
+	private Cliente cliente;
 	private String numero;
 	private String operadora;
-	
-	public Telefone(){
-		this.numero="";
-		this.operadora="";
-	
+
+	public Telefone() {
+
+		this.idTelefone = 0;
+		this.numero = "";
+		this.operadora = "";
+
 	}
 
-	public Telefone(String numero, String operadora){
+	public Telefone(Cliente cliente, String numero, String operadora) {
 		setNumero(numero);
 		setOperadora(operadora);
-		
+		setCliente(cliente);
+
+	}
+
+	public int getIdTelefone() {
+		return idTelefone;
+	}
+
+	public void setIdTelefone(int id) {
+		this.idTelefone = id;
 	}
 
 	public String getNumero() {
@@ -31,5 +45,25 @@ public class Telefone {
 	public void setOperadora(String operadora) {
 		this.operadora = operadora;
 	}
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder output = new StringBuilder();
+
+		output.append("ID Telefone: " + getIdTelefone() + "\n");
+		output.append("Numero: " + getNumero() + "\n");
+		output.append("Operadora: " + getOperadora());
+
+		return output.toString();
+	}
+
 }

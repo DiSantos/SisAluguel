@@ -23,7 +23,6 @@ public class Fachada implements IFachada {
 
 	@Override
 	public void atualizarFuncionario(Funcionario funcionario) throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -36,7 +35,6 @@ public class Fachada implements IFachada {
 
 	@Override
 	public List<Funcionario> listarFuncionarioPorNome(String nome) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
