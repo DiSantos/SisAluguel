@@ -60,4 +60,16 @@ public class Cliente extends Pessoa {
 		this.endereco = endereco;
 	}
 
+	@Override
+	public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("idCli:" + getIdCli() + "\n");
+		sb.append("email: " + getEmail() + "\n");
+		sb.append("Nome: "+getNome());
+
+		return sb.toString();
+	}
+
 }

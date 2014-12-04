@@ -67,6 +67,73 @@ public class CCadastroCliente {
 
 	}
 
+	public boolean removerClientePorId(Integer id) {
+		boolean result = false;
+
+		try {
+
+			Cliente cliente = this.cadastroCli.buscarPorId(id);
+			System.out.println(cliente.toString());
+			System.out.println(id);
+
+			System.out.println("antes tel");
+			for (Telefone tel : this.cadastroTel.listarPorCliente(cliente.getIdCli())) {
+				System.out.println("durante tel");
+				this.cadastroTel.removerTel(tel.getIdTelefone());
+			}
+			System.out.println("depois tel");
+			this.cadastroEnd.removerPorId(id);
+			this.cadastroCli.removerClientePorId(id);
+
+			result = true;
+
+		} catch (Exception e) {
+			System.err.println("Erro ao tentar remover cliente: "
+					+ e.getMessage());
+			UtilGUI.erroMenssage("Cadastro-Cliente",
+					"Erro ao tentar remover cliente!!");
+		} finally {
+			try {
+				SingletonConexaoDB.getInstance().desconectar();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
+
+	public Cliente buscarPorId(Integer id) throws Exception {
+		Cliente cliente = null;
+		try {
+			cliente = this.cadastroCli.buscarPorId(id);
+			if (cliente != null) {
+
+				buscarEnderecoTelefone(cliente);
+			}
+		} catch (Throwable e) {
+			e.printStackTrace();
+			throw new Exception(e);
+		} finally {
+			SingletonConexaoDB.getInstance().desconectar();
+		}
+		return cliente;
+	}
+
+	private void buscarEnderecoTelefone(Cliente cliente) throws Exception {
+
+		cliente.setTelefones(this.cadastroTel.listarPorCliente(cliente
+				.getIdCli()));
+		cliente.setEndereco(this.cadastroEnd.buscarPorIdCliente(cliente
+				.getIdCli()));
+	}
+
+	public boolean alualizarCliente(Cliente cliente) {
+		boolean result = false;
+		return result;
+	}
+
 	public static void main(String[] args) {
 
 		List<Telefone> tels = new ArrayList<Telefone>();

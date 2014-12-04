@@ -58,12 +58,19 @@ public class RepositorioCliente implements IRepositorioCliente {
 	}
 
 	@Override
-	public void removerCliente(String cpf) throws Exception {
+	public void removerClientePorId(Integer id) throws Exception {
 
-		if (cpf != null) {
+		if (id != null) {
 
 			PreparedStatement pstm = null;
 			try {
+
+				String sql = "DELETE FROM Cliente WHERE id_cli=?";
+				pstm = this.conexao.prepareStatement(sql);
+
+				pstm.setInt(1, id);
+				pstm.executeUpdate();
+
 				try {
 
 				} finally {
@@ -84,11 +91,20 @@ public class RepositorioCliente implements IRepositorioCliente {
 	public void alualizarCliente(Cliente cliente) throws Exception {
 
 		if (cliente != null) {
+
 			PreparedStatement pstm = null;
 
 			try {
-				try {
 
+				try {
+					String sql = "UPDATE Cliente SET cli_nome=?,cli_cpf=?,cli_email=? WHERE id_cli=?";
+					pstm = this.conexao.prepareStatement(sql);
+
+					pstm.setString(1, cliente.getNome());
+					pstm.setString(2, cliente.getCpf());
+					pstm.setString(3, cliente.getEmail());
+
+					pstm.executeUpdate();
 				} finally {
 					if (pstm != null && !pstm.isClosed()) {
 						pstm.close();
@@ -105,10 +121,27 @@ public class RepositorioCliente implements IRepositorioCliente {
 	@Override
 	public Cliente buscarPorId(Integer id) throws Exception {
 
+		Cliente cliente = null;
+
 		if (id != null) {
 			PreparedStatement pstm = null;
+			ResultSet rs = null;
 			try {
 				try {
+
+					String sql = "SELECT * FROM Cliente WHERE id_cli=?";
+					pstm = this.conexao.prepareStatement(sql);
+					pstm.setInt(1, id);
+
+					rs = pstm.executeQuery();
+
+					if (rs.next()) {
+						cliente = new Cliente();
+						cliente.setIdCli(id);
+						cliente.setNome(rs.getString(2));
+						cliente.setCpf(rs.getString(3));
+						cliente.setEmail(rs.getString(4));
+					}
 
 				} finally {
 					if (pstm != null && !pstm.isClosed()) {
@@ -121,7 +154,49 @@ public class RepositorioCliente implements IRepositorioCliente {
 				throw new Exception(e);
 			}
 		}
-		return null;
+		return cliente;
+	}
+
+	@Override
+	public Cliente buscarPorCpf(String cpf) throws Exception {
+
+		Cliente cliente = null;
+
+		if (cpf != null) {
+
+			PreparedStatement pstm = null;
+			ResultSet rs = null;
+
+			try {
+				try {
+
+					String sql = "SELECT * FROM Cliente WHERE cli_cpf=?";
+					pstm = this.conexao.prepareStatement(sql);
+					pstm.setString(1, cpf);
+					rs = pstm.executeQuery();
+
+					if (rs.next()) {
+						cliente = new Cliente();
+						cliente.setCpf(cpf);
+						cliente.setNome(rs.getString(2));
+						cliente.setEmail(rs.getString(3));
+					}
+
+				} finally {
+					if (pstm != null) {
+						pstm.close();
+					}
+					if (rs != null) {
+						rs.close();
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new Exception(e);
+			}
+		}
+		return cliente;
 	}
 
 	@Override
@@ -168,4 +243,17 @@ public class RepositorioCliente implements IRepositorioCliente {
 
 		return null;
 	}
+
+	public static void main(String[] args) {
+
+		try {
+			RepositorioCliente r = new RepositorioCliente();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 }

@@ -46,7 +46,7 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 					}
 				} finally {
 
-					if (pstm != null && !pstm.isClosed()) {
+					if (pstm != null) {
 						pstm.close();
 					}
 
@@ -64,7 +64,7 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 
 		if (id != null) {
 
-			String sql = "DELETE FROM Endereco WHERE id_end=?";
+			String sql = "DELETE FROM Endereco WHERE id_cli_fk=?";
 			PreparedStatement pstm = null;
 
 			try {
@@ -124,12 +124,12 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 	@Override
 	public Endereco buscarPorIdCliente(Integer idCliente) throws Exception {
 
+		Endereco end = null;
 		if (idCliente != null) {
 
 			String sql = "SELECT * FROM Endereco WHERE id_cli_fk=?";
 			PreparedStatement pstm = null;
 			ResultSet rs = null;
-			Endereco end = null;
 			try {
 				try {
 
@@ -152,7 +152,7 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 					if (pstm != null && !pstm.isClosed()) {
 						pstm.close();
 					}
-					
+
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -160,7 +160,17 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 			}
 		}
 
-		return null;
+		return end;
 	}
 
+	public static void main(String[] args) {
+		try {
+			RepositorioEndereco repo = new RepositorioEndereco();
+			repo.removerPorId(30);
+			SingletonConexaoDB.getInstance().desconectar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

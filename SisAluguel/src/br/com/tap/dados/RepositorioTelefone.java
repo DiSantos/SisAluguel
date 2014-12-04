@@ -46,7 +46,7 @@ public class RepositorioTelefone implements IRepositorioTelefone {
 
 				} finally {
 
-					if (pstm != null && !pstm.isClosed()) {
+					if (pstm != null) {
 						pstm.close();
 					}
 
@@ -92,7 +92,7 @@ public class RepositorioTelefone implements IRepositorioTelefone {
 
 		if (id != null) {
 
-			String sql = "DELETE FROM Telefone WHERE id_tel=?";
+			String sql = "DELETE FROM Telefone WHERE id_fk_cli=?";
 			PreparedStatement pstm = null;
 			try {
 
@@ -161,10 +161,9 @@ public class RepositorioTelefone implements IRepositorioTelefone {
 	@Override
 	public List<Telefone> listarPorCliente(Integer idCliente) throws Exception {
 
-		Telefone telefone = null;
 		List<Telefone> telefones = new ArrayList<Telefone>();
 		if (idCliente != null) {
-			String sql = "SELECT * FROM Telefones WHERE id_fk_cli=?";
+			String sql = "SELECT * FROM Telefone WHERE id_fk_cli=?";
 			PreparedStatement pstm = null;
 			ResultSet rs = null;
 			try {
@@ -174,10 +173,10 @@ public class RepositorioTelefone implements IRepositorioTelefone {
 					rs = pstm.executeQuery();
 
 					while (rs.next()) {
-						telefone = new Telefone();
-						telefone.setIdTelefone(rs.getInt(1));
-						telefone.setNumero(rs.getString(2));
-						telefone.setOperadora(rs.getString(3));
+						Telefone telefone = new Telefone();
+						telefone.setIdTelefone(rs.getInt(2));
+						telefone.setNumero(rs.getString(3));
+						telefone.setOperadora(rs.getString(4));
 
 						telefones.add(telefone);
 					}
@@ -187,11 +186,52 @@ public class RepositorioTelefone implements IRepositorioTelefone {
 						pstm.close();
 					}
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+				throw new Exception(e);
 			}
 		}
 
 		return telefones;
+	}
+
+	@Override
+	public Telefone buscarPorId(Integer id) throws Exception {
+
+		String sql = "SELECT * FROM Telefone WHERE id_tel=?";
+		PreparedStatement pstm = null;
+		Telefone telefone = null;
+		ResultSet rs = null;
+
+		try {
+
+			try {
+
+				pstm = this.conexao.prepareStatement(sql);
+				pstm.setInt(1, id);
+
+				rs = pstm.executeQuery();
+
+				if (rs.next()) {
+					telefone = new Telefone();
+					telefone.setIdTelefone(id);
+					telefone.setNumero(rs.getString(2));
+					telefone.setOperadora(rs.getString(3));
+				}
+
+			} finally {
+				if (pstm != null && !pstm.isClosed()) {
+					pstm.close();
+				}
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+
+		return telefone;
 	}
 }

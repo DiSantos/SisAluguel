@@ -13,5 +13,7 @@ public interface IRepositorioTelefone {
 
 	public List<Telefone> listarPorCliente(Integer idCliente) throws Exception;
 	
+	public Telefone buscarPorId(Integer id) throws Exception;
+	
 	public List<Telefone> buscaPorNumero(String numero) throws Exception;
 }
